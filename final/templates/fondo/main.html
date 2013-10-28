@@ -1,0 +1,13 @@
+{% extends "fondo/fondo.html" %}
+{% block title %}Home{% endblock %}
+{% block content %}
+{% include "fondo/menu/menu.html" %}
+  <div class="panel panel-default container-fondo">
+    <div class="jumbotron">
+      <p>Lista de fondos</p>
+      <div class="container">
+	<div id="fondosLists"></div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

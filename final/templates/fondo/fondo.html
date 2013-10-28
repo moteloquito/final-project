@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block meta %}
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+{% load staticfiles %}
+{% block styles %}
+<link rel="stylesheet" href="{% static "css/libs/bootstrap/bootstrap.css" %}">
+<link rel="stylesheet" href="{% static "css/final/fondo.css" %}">
+{% endblock %}
+{% block scripts %}
+<script data-main="{% static "js/fondo/main.js" %}" src="{% static "js/libs/require/require.js" %}"></script>
+{% endblock %}
+{% block body %}
+<div class="container">
+{% block content %}{% endblock %}
+</div>
+{% endblock %}

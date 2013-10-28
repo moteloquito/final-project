@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block meta %}
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+{% endblock %}
+{% load staticfiles %}
+{% block styles %}
+    <link href="{% static "css/libs/bootstrap/bootstrap.css" %}" rel="stylesheet" media="screen">
+    <link href="{% static "css/final/login.css" %}" rel="stylesheet" media="screen">
+{% endblock %}
+{% block scripts %}
+<script src="{%  static "js/libs/jquery/jquery.js" %}"></script>
+<script src="{%  static "js/libs/bootstrap/bootstrap.js" %}"></script>
+{% endblock %}
+{% block body %}
+    <div class="container login-container">
+      <div class="panel panel-default">
+	<div class="panel-heading">
+	  <div class="panel-title">
+	    Log into your account
+	  </div>
+	</div>
+	<div class="panel-body">
+	  <!-- Form -->
+	  <form method="post" action="{% url 'django.contrib.auth.views.login' %}" role="form">
+	    {% if form.errors %}
+	    <div class="form-group">
+	      <p class="alert alert-danger">
+		Invalid username/password combination
+	      </p>
+	    </div>
+	    {% endif %}
+	    <div class="form-group">
+	      <label for="id_username">Username</label>
+	      <input type="text" class="form-control" id="id_username" name="username" autofocus />
+	    </div>
+	    <div class="form-group">
+	      <label for="id_password">Password</label>
+	      <input type="password" class="form-control" id="id_password" name="password" />
+	    </div>
+	    <div class="form-group">
+	      <input type="checkbox" id="id_rememberme" name="rememberme" />
+	      <label for="id_rememberme">Remember me</label>
+	    </div>
+	    <div class="text-center">
+	      <button class="btn btn-primary" type="submit">Login</button>
+	    </div>
+	    <input type="hidden" name="next" value="{{ next }}" />
+	    {% csrf_token %}
+	  </form>
+	  <!-- End form -->
+	</div>
+      </div>
+    </div>
+{% endblock %}
