@@ -5,18 +5,8 @@ define([
     var FondoRouter = BaseRouter.extend({
 
 	routes: {
-	    "start" : "on_start",
 	    "fondos" : "on_fondos",
 	    "tickets" : "on_tickets"
-	},
-
-	on_start: function() {
-	    var self = this;
-
-	    require(['views/start/startView'], function(StartView) {
-		var view = new StartView();
-		self.render(view);
-	    });
 	},
 
 	on_fondos: function() {
