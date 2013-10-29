@@ -2,13 +2,13 @@ define([
     'jquery',
     'underscore',
     'backbone',
-    'tpl!fondo/views/main.tpl',
+    'tpl!fondo/templates/main_fondo_list.tpl',
     'fondo/collections/fondoCollection'
 ], function($, _, Backbone, mainTemplate, Fondos){
 
     var MainView = Backbone.View.extend({
 
-	el: '#fondosLists',
+	/* el: '#fondosList', */
 	template: mainTemplate,
 
 	initialize: function() {
@@ -16,9 +16,11 @@ define([
 
 	render: function() {
 	    var self = this;
+	    this.$el.empty();
 	    this.fondos = new Fondos();
 	    this.listenTo(this.fondos, 'sync', this.renderFondos);
 	    this.fondos.fetch();
+	    return this;
 	},
 
 	renderFondos: function() {
