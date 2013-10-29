@@ -20,7 +20,20 @@ requirejs.config({
     }
 });
 
-requirejs(['backbone', 'bootstrap', 'jquery', 'underscore', 'app'],
-function(Backbone, Bootstrap, $, _, App) {
-    var app = new App();
+requirejs([
+    'backbone',
+    'bootstrap',
+    'jquery',
+    'underscore',
+    'app',
+    'fondo/routers/fondo_router',
+    'fondo/views/mainView'
+],
+function(Backbone, Bootstrap, $, _, App, FondoRouter, MainView) {
+    var router = new FondoRouter();
+    var mainView = new MainView();
+
+    Backbone.history.start();
+
+    router.render(mainView);
 });

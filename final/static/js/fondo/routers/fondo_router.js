@@ -1,12 +1,13 @@
 define([
-    'routers/base_router'
+    'fondo/routers/base_router'
 ], function (BaseRouter) {
     
     var FondoRouter = BaseRouter.extend({
 
 	routes: {
 	    "start" : "on_start",
-	    "detail" : "on_detail"
+	    "fondos" : "on_fondos",
+	    "tickets" : "on_tickets"
 	},
 
 	on_start: function() {
@@ -18,11 +19,20 @@ define([
 	    });
 	},
 
-	on_detail: function() {
+	on_fondos: function() {
 	    var self = this;
 
-	    require(['views/detail/detailView'], function(DetailView) {
-		var view = new DetailView();
+	    require(['fondo/views/mainView'], function(MainView) {
+		var view = new MainView();
+		self.render(view);
+	    });
+	},
+
+	on_tickets: function() {
+	    var self = this;
+
+	    require(['fondo/views/tickets'], function(TicketsView) {
+		var view = new TicketsView();
 		self.render(view);
 	    });
 	}

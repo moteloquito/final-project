@@ -12,7 +12,7 @@ define([
 		this.currentView.remove();
 	    }
 	    view.render();
-	    $('.content-view').append(view.el);
+	    $('#main-container').append(view.el);
 	    this.currentView = view;
 	    if (callback) {
 		callback();
