@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core import serializers
+from django.core.paginator import Paginator
 from django.http.response import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render_to_response, render
 from django.template import RequestContext
@@ -21,8 +22,17 @@ def main(request):
 
 def get_ticket_for_fondo(request, fondo_id):
 
+    page = 1
+    size = 5
+    if request.POST.get('page'):
+        page = request.POST['page']
+    if request.POST.get('size'):
+        size = request.POST['size']
+        
     fondo = get_object_or_404(Fondo, pk=fondo_id)
-    tickets = serializers.serialize('json', fondo.ticket_set.all())
+    tickets = fondo.ticket_set.all()
+    p = Paginator(tickets, size)
+    tickets = serializers.serialize('json', p.page(page))
 
     return HttpResponse(tickets, mimetype='application/json')
 

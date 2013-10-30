@@ -1,33 +1,32 @@
 define([
-    'jquery',
-    'underscore',
-    'backbone',
-    'tpl!fondo/templates/main_fondo_list.tpl',
-    'fondo/collections/fondoCollection'
+  'jquery',
+  'underscore',
+  'backbone',
+  'tpl!fondo/templates/main_fondo_list.tpl',
+  'fondo/collections/fondoCollection'
 ], function($, _, Backbone, mainTemplate, Fondos){
 
-    var MainView = Backbone.View.extend({
+  var MainView = Backbone.View.extend({
 
-	/* el: '#fondosList', */
-	template: mainTemplate,
+    template: mainTemplate,
 
-	initialize: function() {
-	},
+    initialize: function() {
+    },
 
-	render: function() {
-	    var self = this;
-	    this.$el.empty();
-	    this.fondos = new Fondos();
-	    this.listenTo(this.fondos, 'sync', this.renderFondos);
-	    this.fondos.fetch();
-	    return this;
-	},
+    render: function() {
+      var self = this;
+      this.$el.empty();
+      this.fondos = new Fondos();
+      this.listenTo(this.fondos, 'sync', this.renderFondos);
+      this.fondos.fetch();
+      return this;
+    },
 
-	renderFondos: function() {
-	    this.$el.html(mainTemplate({fondos: this.fondos.models}));
-	}
+    renderFondos: function() {
+      this.$el.html(mainTemplate({fondos: this.fondos.models}));
+    }
 
-    });
+  });
 
-    return MainView;
+  return MainView;
 });

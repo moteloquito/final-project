@@ -1,42 +1,42 @@
 define([
-    'jquery',
-    'underscore',
-    'backbone',
-    'tpl!fondo/templates/user/tickets.tpl',
-    'fondo/collections/ticketCollection'
+  'jquery',
+  'underscore',
+  'backbone',
+  'tpl!fondo/templates/user/tickets.tpl',
+  'fondo/collections/ticketCollection'
 ], function($, _, Backbone, ticketsTemplate, Tickets) {
 
-    var TicketsView = Backbone.View.extend({
+  var TicketsView = Backbone.View.extend({
 
-	template: ticketsTemplate,
+    template: ticketsTemplate,
 
-	initialize: function(parameters) {
-	    this.fondo_id = parameters.fondo_id;
-	},
+    initialize: function(parameters) {
+      this.fondo_id = parameters.fondo_id;
+    },
 
-	render: function() {
-	    var self = this;
-	    this.$el.empty();
+    render: function() {
+      var self = this;
+      this.$el.empty();
 
-	    this.tickets = new Tickets();
-	    this.tickets.meta('id', this.fondo_id);
-	    this.listenTo(this.tickets, 'sync', this.renderTickets);
-	    this.listenTo(this.tickets, 'error', this.renderTicketsError);
-	    this.tickets.fetch();
+      this.tickets = new Tickets();
+      this.tickets.meta('id', this.fondo_id);
+      this.listenTo(this.tickets, 'sync', this.renderTickets);
+      this.listenTo(this.tickets, 'error', this.renderTicketsError);
+      this.tickets.fetch();
 
-	    return this;
-	},
+      return this;
+    },
 
-	renderTickets: function() {
-	    this.$el.html(ticketsTemplate({ tickets: this.tickets.models }));
-	},
+    renderTickets: function() {
+      this.$el.html(ticketsTemplate({ tickets: this.tickets.models }));
+    },
 
-	renderTicketsError: function() {
-	    var tickets = [];
-	    this.$el.html(ticketsTemplate({ tickets: tickets }));
-	}
-    });
+    renderTicketsError: function() {
+      var tickets = [];
+      this.$el.html(ticketsTemplate({ tickets: tickets }));
+    }
+  });
 
-    return TicketsView;
+  return TicketsView;
 });
-    
+
