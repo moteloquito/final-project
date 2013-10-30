@@ -21,13 +21,18 @@ define([
 	    this.tickets = new Tickets();
 	    this.tickets.meta('id', this.fondo_id);
 	    this.listenTo(this.tickets, 'sync', this.renderTickets);
+	    this.listenTo(this.tickets, 'error', this.renderTicketsError);
 	    this.tickets.fetch();
 
 	    return this;
 	},
 
 	renderTickets: function() {
-	    this.$el.html(ticketsTemplate({ tickets: this.tickets.models }));
+	    this.$el.html(ticketsTemplate({ tickets: this.tickets.models, empty: (this.tickets.models.length === 0) }));
+	},
+
+	renderTicketsError: function() {
+	    this.$el.html(ticketsTemplate({ empty: true }));
 	}
     });
 

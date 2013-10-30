@@ -13,14 +13,20 @@
 	  </tr>
 	  </thead>
 	  <tbody>
-	  <% $.each(tickets, function(key, ticket) { %>
-	  <tr>
-	    <td class="number-value"><%= ticket.get('id') %></td>
-	    <td><%= ticket.get('description') %></td>
-	    <td class="price-value"><%= ticket.get('value') %></td>
-	    <td><%= ticket.get('date') %></td>
-	  </tr>
-	  <% }) %>
+	    <% if (empty) { %>
+	    <tr>
+	      <td colspan="4" class="text-center">No tickets</td>
+	    </tr>
+	    <% } else { %>
+	    <% $.each(tickets, function(key, ticket) { %>
+	    <tr>
+	      <td class="number-value"><%= ticket.get('id') %></td>
+	      <td><%= ticket.get('description') %></td>
+	      <td class="price-value"><%= ticket.get('value') %></td>
+	      <td><%= ticket.get('date') %></td>
+	    </tr>
+	    <% }); %>
+	    <% } %>
 	  </tbody>
 	</table>
       </div>
