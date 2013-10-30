@@ -11,4 +11,5 @@ urlpatterns = patterns(
     'final.apps.fondo',
     url(r'^main$', 'views.main', name='main'),
     url(r'^', include(router.urls)),
+    url(r'^rest/fondo/tickets/(?P<fondo_id>\d+)$', 'views.get_ticket_for_fondo', name='tickets'),
 )

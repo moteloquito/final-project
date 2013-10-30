@@ -6,7 +6,7 @@ define([
 
 	routes: {
 	    "fondos" : "on_fondos",
-	    "tickets" : "on_tickets"
+	    "tickets/:fondoid" : "on_tickets"
 	},
 
 	on_fondos: function() {
@@ -18,11 +18,11 @@ define([
 	    });
 	},
 
-	on_tickets: function() {
+	on_tickets: function(fondoid) {
 	    var self = this;
 
 	    require(['fondo/views/tickets'], function(TicketsView) {
-		var view = new TicketsView();
+		var view = new TicketsView({ fondo_id: fondoid });
 		self.render(view);
 	    });
 	}
