@@ -13,7 +13,7 @@
 	  </tr>
 	  </thead>
 	  <tbody>
-	    <% if (empty) { %>
+	    <% if (tickets.length === 0) { %>
 	    <tr>
 	      <td colspan="4" class="text-center">No tickets</td>
 	    </tr>

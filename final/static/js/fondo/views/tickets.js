@@ -28,11 +28,12 @@ define([
 	},
 
 	renderTickets: function() {
-	    this.$el.html(ticketsTemplate({ tickets: this.tickets.models, empty: (this.tickets.models.length === 0) }));
+	    this.$el.html(ticketsTemplate({ tickets: this.tickets.models }));
 	},
 
 	renderTicketsError: function() {
-	    this.$el.html(ticketsTemplate({ empty: true }));
+	    var tickets = [];
+	    this.$el.html(ticketsTemplate({ tickets: tickets }));
 	}
     });
 
