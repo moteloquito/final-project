@@ -5,7 +5,7 @@ from django.contrib.auth.views import redirect_to_login
 from re import compile
 import logging
 
-_logger = logging.getLogger(__name__)
+_logger = logging.getLogger('middleware')
 
 class AuthenticatedPathsMiddleware(object):
 
