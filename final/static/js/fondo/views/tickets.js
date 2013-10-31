@@ -19,7 +19,7 @@ define([
       this.$el.empty();
 
       this.tickets = new Tickets();
-      this.tickets.meta('id', this.fondo_id);
+      this.tickets.setId(this.fondo_id);
       this.listenTo(this.tickets, 'sync', this.renderTickets);
       this.listenTo(this.tickets, 'error', this.renderTicketsError);
       this.tickets.fetch();
