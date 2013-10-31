@@ -164,7 +164,12 @@ LOGGING = {
             'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
-        }
+        },
+        'middleware': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
     }
 }
 
