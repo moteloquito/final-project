@@ -7,7 +7,8 @@ requirejs.config({
     jquerycookie: '/static/js/libs/jquery/jquery.cookie',
     tpl: '/static/js/libs/tpl/tpl',
     underscore: '/static/js/libs/underscore/underscore',
-    app: '/static/js/fondo/app'
+    app: '/static/js/fondo/app',
+    formatNumber: '/static/js/libs/utils/formatNumber'
   },
   shim: {
     backbone: {
@@ -21,7 +22,10 @@ requirejs.config({
       deps: ['jquery'],
       exports: 'Cookie'
     },
-    bootstrap: ['jquery']
+    bootstrap: ['jquery'],
+    formatNumber: {
+      exports: 'formatNumber'
+    }
   }
 });
 
