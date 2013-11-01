@@ -1,10 +1,9 @@
 define([
-  'jquery',
   'jquerycookie',
   'backbone'
-], function($, Cookie, B) {
+], function() {
 
-  var CSRFCollection = B.Collection.extend({
+  var CSRFCollection = Backbone.Collection.extend({
 
     fetch: function(params) {
       var options = params || {};
@@ -17,7 +16,7 @@ define([
       options.contentType = 'application/json';
       options.reset = true;
       
-      return B.Collection.prototype.fetch.call(this, options);
+      return Backbone.Collection.prototype.fetch.call(this, options);
     }
 
   });
