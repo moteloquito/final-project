@@ -1,14 +1,14 @@
 define([
-  'jquery',
-  'underscore',
-  'backbone',
   'tpl!fondo/templates/main_fondo_list.tpl',
-  'fondo/collections/fondoCollection'
-], function($, _, Backbone, mainTemplate, Fondos){
+  'fondo/collections/fondoCollection',
+  'backbone'
+], function(mainTemplate, Fondos){
 
   var MainView = Backbone.View.extend({
 
     template: mainTemplate,
+    tagName: "div",
+    className: "fondosList",
 
     initialize: function() {
     },

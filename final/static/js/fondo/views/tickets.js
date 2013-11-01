@@ -1,16 +1,17 @@
 define([
-  'jquery',
-  'underscore',
-  'backbone',
   'tpl!fondo/templates/user/tickets.tpl',
-  'fondo/collections/ticketCollection'
-], function($, _, Backbone, ticketsTemplate, Tickets) {
+  'fondo/collections/ticketCollection',
+  'backbone'
+], function(ticketsTemplate, Tickets) {
 
   var TicketsView = Backbone.View.extend({
 
     template: ticketsTemplate,
+    tagName: "div",
+    className: "ticketsList",
 
     initialize: function(parameters) {
+      this.el = $(".ticketList");
       this.fondo_id = parameters.fondo_id;
     },
 

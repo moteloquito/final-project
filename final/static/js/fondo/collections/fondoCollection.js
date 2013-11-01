@@ -1,6 +1,6 @@
 define([
-  'backbone',
-  'fondo/models/fondoModel'
+  'fondo/models/fondoModel',
+  'backbone'
 ], function(FondoModel) {
 
   var Fondos = Backbone.Collection.extend({
