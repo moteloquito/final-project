@@ -21,7 +21,7 @@
 	  <tr>
 	    <td class="number-value"><%= ticket.get('id') %></td>
 	    <td><%= ticket.get('description') %></td>
-	    <td class="price-value"><%= ticket.get('value') %></td>
+	    <td class="price-value"><%= formatNumber.new(ticket.get('value'), 2, '$ ') %></td>
 	    <td><%= ticket.get('date') %></td>
 	  </tr>
 	  <% }); %>

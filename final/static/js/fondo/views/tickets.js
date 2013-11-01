@@ -1,8 +1,9 @@
 define([
   'tpl!fondo/templates/user/tickets.tpl',
   'fondo/collections/ticketCollection',
+  'formatNumber',
   'backbone'
-], function(ticketsTemplate, Tickets) {
+], function(ticketsTemplate, Tickets, formatNumber) {
 
   var TicketsView = Backbone.View.extend({
 
@@ -29,7 +30,7 @@ define([
     },
 
     renderTickets: function() {
-      this.$el.html(ticketsTemplate({ tickets: this.tickets.models }));
+      this.$el.html(ticketsTemplate({ tickets: this.tickets.models, formatNumber: formatNumber }));
     },
 
     renderTicketsError: function() {
