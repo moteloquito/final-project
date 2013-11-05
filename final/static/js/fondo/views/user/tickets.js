@@ -31,7 +31,9 @@ define([
     renderTickets: function() {
       this.$el.html(ticketsTemplate(
         {
-          tickets: this.tickets.models,
+          tickets: this.tickets.models[0].get('tickets'),
+          pagination: this.tickets.models[0].get('pagination'),
+          // tickets: this.tickets.tickets.models,
           formatNumber: formatNumber
         }
       ));

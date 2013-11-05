@@ -36,6 +36,14 @@
 	  </tbody>
         </table>
         <!--       </div> -->
+        <ul class="pager pager-sm">
+          <% if (pagination.get('has_previous')) { %>
+          <li class="previous"><a href="#">&larr; Previuos</a></li>
+          <% } %>
+          <% if (pagination.get('has_next')) { %>
+          <li class="next"><a href="#">Next &rarr;</a></li>
+          <% } %>
+        </ul>
     </div>
   </div>
 </div>

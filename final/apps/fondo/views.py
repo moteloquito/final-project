@@ -49,7 +49,8 @@ def get_ticket_for_fondo(request, fondo_id):
         pagination = {}
         pagination['has_previous'] = pag.has_previous()
         pagination['has_next'] = pag.has_next()
-        pagination['current'] = page
+        pagination['page'] = page
+        pagination['size'] = size
         data = {}
         data['tickets'] = tickets
         data['pagination'] = pagination
