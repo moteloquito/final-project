@@ -6,6 +6,7 @@ from django.core.paginator import Paginator, EmptyPage
 from django.http.response import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render_to_response, render
 from django.template import RequestContext
+from django.utils import simplejson
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
@@ -34,12 +35,30 @@ def get_ticket_for_fondo(request, fondo_id):
     tickets = fondo.ticket_set.all()
     p = Paginator(tickets, size)
     try:
-        tickets = QuerySetSerializer().serialize(p.page(page))
+        pag = p.page(page)
+        # tickets = QuerySetSerializer().serialize(pag)
+        tickets = []
+        for t in pag:
+            ticket = {}
+            ticket['id'] = str(t.id)
+            ticket['value'] = str(t.value)
+            ticket['description'] = str(t.description)
+            ticket['date'] = str(t.date)
+            tickets.append(ticket)
+
+        pagination = {}
+        pagination['has_previous'] = pag.has_previous()
+        pagination['has_next'] = pag.has_next()
+        pagination['current'] = page
+        data = {}
+        data['tickets'] = tickets
+        data['pagination'] = pagination
+        # data = simplejson.dumps(pagination)
         # tickets = serializers.serialize('json', p.page(page))
     except EmptyPage:
         return HttpResponse({'error': 'Object is not your own'}, status=status.HTTP_404_NOT_FOUND, mimetype='application/json')
         
-    return HttpResponse(tickets, mimetype='application/json')
+    return HttpResponse(simplejson.dumps(data), mimetype='application/json')
 
 
 class FondoViewSet(viewsets.ModelViewSet):

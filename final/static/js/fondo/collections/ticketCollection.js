@@ -1,9 +1,9 @@
 define([
-  'jquery',
-  'backbone',
   'fondo/models/ticketModel',
-  'fondo/collections/csrfCollection'
-], function($, Backbone, TicketModel, C) {
+  'fondo/collections/csrfCollection',
+  'jquery',
+  'backbone'
+], function(TicketModel, C) {
 
   var Tickets = C.extend({
 
@@ -41,14 +41,14 @@ define([
 
     parse: function(data) {
       var results = [];
-      _.each(data, function(ticket) {
-	var t = {
-	  id: ticket.id,
-	  description: ticket.description,
-	  value: ticket.value,
-	  date: ticket.date
-	};
-	results.push(t);
+      _.each(data.tickets, function(ticket) {
+        var t = {
+          id: ticket.id,
+          description: ticket.description,
+          value: ticket.value,
+          date: ticket.date
+        };
+        results.push(t);
       });
       return results;
     }
