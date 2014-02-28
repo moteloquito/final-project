@@ -3,6 +3,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.models import User
 from django.core import serializers
 from django.core.paginator import Paginator, EmptyPage
+from django.core.serializers.json import DjangoJSONEncoder
 from django.http.response import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render_to_response, render
 from django.template import RequestContext
@@ -10,7 +11,7 @@ from django.utils import simplejson
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
-from final.apps.fondo.domain.serializers import FondoSerializer, QuerySetSerializer
+from final.apps.fondo.domain.serializers import FondoSerializer, TicketSerializer, QuerySetSerializer
 from final.apps.fondo.models import Fondo, Ticket
 import logging
 
@@ -20,6 +21,27 @@ def main(request):
     u = request.user
     fondos = u.fondo_set.all()
     return render_to_response('fondo/main.html', {'fondos': fondos})
+
+def get_fondo_status(request, fondo_id):
+    """ Gets the current status.
+    """
+    fondo = get_object_or_404(Fondo, pk=fondo_id)
+    submited = fondo.ticket_set.filter(status='SUBM')
+    aproved = fondo.ticket_set.filter(status='OPEN')
+
+    total_submited = 0.0
+    total_aproved = 0.0
+    if submited:
+        total_submited = sum(t.value for t in submited)
+    if aproved:
+        total_aproved = sum(t.value for t in aproved)
+
+    print "Status: submited %s, aproved %s" % (total_submited, total_aproved)
+    data = {}
+    data['submited'] = total_submited
+    data['aproved'] = total_aproved
+ 
+    return HttpResponse(simplejson.dumps(data, cls=DjangoJSONEncoder), mimetype='application/json')
 
 def get_ticket_for_fondo(request, fondo_id):
 
@@ -95,3 +117,25 @@ class FondoViewSet(viewsets.ModelViewSet):
         if hasattr(request, 'user') and request.user.is_superuser:
             return True
         return False
+
+
+class TicketViewSet(viewsets.ModelViewSet):
+
+    queryset = Ticket.objects.all()
+    serializer_class = TicketSerializer
+
+    def list(self, request):
+
+        status = request.GET.get('status')
+        fondo_id = request.GET.get('fondo')
+        _logger.debug("Getting tickets for fondo %s and status %s" % (fondo_id, status))
+        
+        user = request.user
+        fondo = get_object_or_404(Fondo, pk=fondo_id)
+
+        if status is not None:
+            q = Ticket.objects.filter(fondo=fondo, status=status)
+        else:
+            q = Ticket.objects.filter(fondo=fondo)
+        
+        return Response(TicketSerializer(q).data)

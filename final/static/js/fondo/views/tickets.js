@@ -14,6 +14,7 @@ define([
     initialize: function(parameters) {
       this.el = $(".ticketList");
       this.fondo_id = parameters.fondo_id;
+      this.status = parameters.status
     },
 
     render: function() {
@@ -22,6 +23,7 @@ define([
 
       this.tickets = new Tickets();
       this.tickets.setId(this.fondo_id);
+      this.tickets.setStatus(this.status);
       this.listenTo(this.tickets, 'sync', this.renderTickets);
       this.listenTo(this.tickets, 'error', this.renderTicketsError);
       this.tickets.fetch();

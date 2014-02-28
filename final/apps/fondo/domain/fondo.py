@@ -12,3 +12,4 @@ class Fondo(Model):
     class Meta:
         db_table = 'fondo'
         app_label = 'fondo'
+

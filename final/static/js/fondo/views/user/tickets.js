@@ -14,6 +14,8 @@ define([
     initialize: function(parameters) {
       this.el = $(".ticketList");
       this.fondo_id = parameters.fondo_id;
+      this.status = parameters.status;
+      this.title = parameters.title;
     },
 
     render: function() {
@@ -21,6 +23,7 @@ define([
       
       this.tickets = new Tickets();
       this.tickets.setId(this.fondo_id);
+      this.tickets.setStatus(this.status);
       this.listenTo(this.tickets, 'sync', this.renderTickets);
       this.listenTo(this.tickets, 'error', this.renderTicketsError);
       this.tickets.fetch();
@@ -31,12 +34,13 @@ define([
     renderTickets: function() {
       this.$el.html(ticketsTemplate(
         {
+	  title: this.title,
           tickets: this.tickets.models[0].get('tickets'),
           pagination: this.tickets.models[0].get('pagination'),
-          // tickets: this.tickets.tickets.models,
-          formatNumber: formatNumber
-        }
-      ));
+          formatNumber: formatNumber,
+	  status: this.status
+        })
+      );
     },
 
     renderTicketsError: function() {
