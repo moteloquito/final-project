@@ -36,7 +36,7 @@ def get_fondo_status(request, fondo_id):
     if aproved:
         total_aproved = sum(t.value for t in aproved)
 
-    print "Status: submited %s, aproved %s" % (total_submited, total_aproved)
+    print ("Status: submited %s, aproved %s" % (total_submited, total_aproved))
     data = {}
     data['submited'] = total_submited
     data['aproved'] = total_aproved

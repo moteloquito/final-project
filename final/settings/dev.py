@@ -1,4 +1,4 @@
-from common import *
+from .common import *
 import os
 
 DB_PATH = os.path.join(PROJECT_PATH, 'db/db.sql')

@@ -3,7 +3,7 @@ requirejs.config({
   paths: {
     backbone: '/static/js/libs/backbone/backbone',
     bootstrap: '/static/js/libs/bootstrap/bootstrap',
-    jquery: '/static/js/libs/jquery/jquery',
+    jquery: '/static/js/libs/jquery/jquery-2.0.3',
     jquerycookie: '/static/js/libs/jquery/jquery.cookie',
     tpl: '/static/js/libs/tpl/tpl',
     underscore: '/static/js/libs/underscore/underscore',
