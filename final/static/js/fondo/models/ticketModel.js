@@ -27,6 +27,7 @@ define([
       };
       return Backbone.Model.prototype.sync(method, model, options);
     }
+
   });
 
   return TicketModel;
