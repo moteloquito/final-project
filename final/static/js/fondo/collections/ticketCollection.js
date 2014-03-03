@@ -9,7 +9,7 @@ define([
   // var Tickets = C.extend({
   var Tickets = Backbone.Collection.extend({
 
-    // model: 
+    // model: TicketModel,
 
     url: function() {
       params = [];
@@ -45,6 +45,7 @@ define([
     setPagination: function(pagination) {
       this.pagination = pagination;
     },
+
 
     /* fetch: function() {
     var options = {

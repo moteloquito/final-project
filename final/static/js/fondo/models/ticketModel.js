@@ -1,14 +1,16 @@
 define([
+  'jquerycookie',
   'backbone'
-], function(Backbone) {
+], function() {
 
   var TicketModel = Backbone.Model.extend({
 
+    url: function() {
+      return 'rest/ticket/' + this.id + '/';
+    },
+
     defaults: {
-      id: -1,
-      description: '',
-      date: '2013-01-01',
-      value: 0.00
+      id: -1
     },
 
     initialize: function() {
@@ -16,8 +18,15 @@ define([
       this.description = this.get('description');
       this.date = this.get('date');
       this.value = this.get('value');
-    }
+      this.status = this.get('status');
+    },
 
+    sync: function(method, model, options) {
+      options.beforeSend = function(xhr){
+	xhr.setRequestHeader('X-CSRFToken', $.cookie('csrftoken'));
+      };
+      return Backbone.Model.prototype.sync(method, model, options);
+    }
   });
 
   return TicketModel;

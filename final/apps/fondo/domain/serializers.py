@@ -13,7 +13,7 @@ class TicketSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta():
         model = Ticket
-        fields = ('id', 'description', 'value', 'date')
+        fields = ('id', 'description', 'value', 'date', 'status')
 
 
 class QuerySetSerializer(sers.get_serializer('json')):

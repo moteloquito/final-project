@@ -2,14 +2,19 @@ define([
   'tpl!fondo/templates/user/tickets.tpl',
   'fondo/collections/ticketCollection',
   'formatNumber',
+  'fondo/models/ticketModel',
   'backbone'
-], function(ticketsTemplate, Tickets, formatNumber) {
+], function(ticketsTemplate, Tickets, formatNumber, TicketModel) {
 
   var TicketsView = Backbone.View.extend({
 
     template: ticketsTemplate,
     tagName: "div",
     className: "ticketsList",
+
+    events: {
+      "click .ticketok": "submit_ticket"
+    },
 
     initialize: function(parameters) {
       this.el = $(".ticketList");
@@ -46,6 +51,13 @@ define([
     renderTicketsError: function() {
       var tickets = [];
       this.$el.html(ticketsTemplate({ tickets: tickets }));
+    },
+
+    submit_ticket: function(data) {
+      var ticket_id = $(data.target).data('id');
+      var ticket = new TicketModel({id: ticket_id});
+      ticket.save({status: "SUBM"}, {patch: true});
+      this.render();
     }
 
   });

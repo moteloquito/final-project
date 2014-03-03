@@ -16,6 +16,7 @@
 	      <th>Description</th>
 	      <th>$</th>
 	      <th>Date</th>
+	      <th>Action</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -30,6 +31,13 @@
 	      <td><%= ticket.get('description') %></td>
 	      <td class="price-value"><%= formatNumber.new(ticket.get('value'), 2, '$ ') %></td>
 	      <td class="number-value"><%= ticket.get('date') %></td>
+	      <td>
+		<div class="center-block">
+		  <span data-id="<%= ticket.get('id') %>" class="ticketok glyphicon glyphicon-ok"></span>
+		  <span class="glyphicon glyphicon-remove"></span>
+		</div>
+	      </div>
+	      </td>
 	    </tr>
 	    <% }); %>
 	    <% } %>
