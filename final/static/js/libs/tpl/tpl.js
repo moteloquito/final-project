@@ -168,9 +168,12 @@
 					ext = ext.substring(0, index);
 				}
 
-				//Load the tpl.
-				url = 'nameToUrl' in req ? req.nameToUrl(modName, "." + ext) : req.toUrl(modName + "." + ext);
-				
+				if (modName.charAt(0) !== '/') {
+				    //Load the tpl.
+				    url = 'nameToUrl' in req ? req.nameToUrl(modName, "." + ext) : req.toUrl(modName + "." + ext);
+				} else {
+				    url = modName;
+				}
 				tpl.get(url, function (content) {
 					content = template(content);
 					

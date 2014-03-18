@@ -1,5 +1,6 @@
 define([
-  'tpl!fondo/templates/user/tickets.tpl',
+  'tpl!/fondo/template/tickets.html',
+  //'tpl!fondo/templates/user/tickets.tpl',
   'fondo/collections/ticketCollection',
   'formatNumber',
   'fondo/models/ticketModel',
@@ -21,6 +22,7 @@ define([
       this.fondo_id = parameters.fondo_id;
       this.status = parameters.status;
       this.title = parameters.title;
+      //this.model.on('change', this.render, this);
     },
 
     render: function() {
@@ -39,11 +41,11 @@ define([
     renderTickets: function() {
       this.$el.html(ticketsTemplate(
         {
-	  title: this.title,
-          tickets: this.tickets.models[0].get('tickets'),
-          pagination: this.tickets.models[0].get('pagination'),
+          title: this.title,
+          tickets: this.tickets.models,
+          pagination: this.tickets.pagination,
           formatNumber: formatNumber,
-	  status: this.status
+          status: this.status
         })
       );
     },
@@ -55,9 +57,9 @@ define([
 
     submit_ticket: function(data) {
       var ticket_id = $(data.target).data('id');
-      var ticket = new TicketModel({id: ticket_id});
-      ticket.save({status: "SUBM"}, {patch: true});
-      this.render();
+      var ticket = this.tickets.get(ticket_id);
+      ticket.set({status: "SUBM"});
+      ticket.save({patch: true});
     }
 
   });

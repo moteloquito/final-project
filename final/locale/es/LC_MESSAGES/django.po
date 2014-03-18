@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-11 18:34-0300\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"POT-Creation-Date: 2014-03-15 15:34-0300\n"
+"PO-Revision-Date: 2014-03-15 15:39-0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
@@ -40,3 +40,43 @@ msgstr ""
 #: .\apps\users\models.py:21
 msgid "custom_user_plural"
 msgstr ""
+
+#: .\templates\fondo\menu\menu.html:10 .\templates\fondo\menu\menu.html:14
+msgid "dashboard"
+msgstr "Panel de control"
+
+#: .\templates\registration\login.html:21
+msgid "login_init_session"
+msgstr "Inicia sesi&oacute;n para acceder"
+
+#: .\templates\registration\login.html:30
+msgid "login_error"
+msgstr "Usuario o contrase&ntilde;a incorrecta"
+
+#: .\templates\registration\login.html:35
+msgid "login_username"
+msgstr "Nombre de usuario"
+
+#: .\templates\registration\login.html:39
+msgid "login_password"
+msgstr "Contrase&ntilde;a"
+
+#: .\templates\registration\login.html:44
+msgid "login_remember_me"
+msgstr "Recu&eacute;rdame"
+
+#: .\templates\registration\login.html:47
+msgid "login_submit"
+msgstr "Iniciar sesi&oacute;n"
+
+#: .\templates\template\tickets.html:18
+msgid "description"
+msgstr "Descripci&oacute;n"
+
+#: .\templates\template\tickets.html:20
+msgid "column_date"
+msgstr "Fecha"
+
+#: .\templates\template\tickets.html:21
+msgid "column_action"
+msgstr "Acciones"

@@ -8,6 +8,11 @@ from django.http.response import HttpResponse, HttpResponseForbidden
 from django.shortcuts import get_object_or_404, render_to_response, render
 from django.template import RequestContext
 from django.utils import simplejson
+
+from django.http import Http404
+from django.template import TemplateDoesNotExist
+# from django.views.generic.simple import direct_to_template
+
 from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
@@ -139,3 +144,11 @@ class TicketViewSet(viewsets.ModelViewSet):
             q = Ticket.objects.filter(fondo=fondo)
         
         return Response(TicketSerializer(q).data)
+
+
+def template_pages(request, page):
+    try:
+        template_name = "template/%s.html" % page
+        return render_to_response(template_name, {}, context_instance=RequestContext(request))
+    except TemplateDoesNotExist:
+        raise Http404()

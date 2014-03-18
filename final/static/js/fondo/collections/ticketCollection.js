@@ -9,7 +9,7 @@ define([
   // var Tickets = C.extend({
   var Tickets = Backbone.Collection.extend({
 
-    // model: TicketModel,
+    model: TicketModel,
 
     url: function() {
       params = [];
@@ -23,7 +23,6 @@ define([
       return 'rest/ticket/' + (
         params.length > 0 ? ('?' + params.join('&')) : ''
       )
-      // return 'rest/fondo/tickets/' + this.fondo_id;
     },
 
     initialize: function() {
@@ -46,28 +45,17 @@ define([
       this.pagination = pagination;
     },
 
-
-    /* fetch: function() {
-    var options = {
-    data: {
-    page: this.pagination.page,
-    size: this.pagination.size
-  }
-  };
-    return C.prototype.fetch.call(this, options);
-  }, */
-
     parse: function(data) {
       var results = {};
       var tickets = [];
       var pagination = new Pagination(data.pagination);
+      this.pagination = pagination;
+
       _.each(data, function(ticket) {
         var t = new TicketModel(ticket);
         tickets.push(t);
       });
-      results.tickets = tickets;
-      results.pagination = pagination;
-      return results;
+      return tickets;
     }
 
   });

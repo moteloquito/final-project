@@ -26,7 +26,7 @@ TIME_ZONE = 'America/Argentina/Cordoba'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
-LANGUAGE_CODE = 'es-AR'
+LANGUAGE_CODE = 'es'
 
 SITE_ID = 1
 
@@ -84,11 +84,15 @@ TEMPLATE_LOADERS = (
 )
 
 MIDDLEWARE_CLASSES = (
-    'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+
+
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+
     # Uncomment the next line for simple clickjacking protection:
     # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
     # 'final.middleware.secure_paths',
@@ -102,6 +106,10 @@ WSGI_APPLICATION = 'final.wsgi.application'
 
 TEMPLATE_DIRS = (
     os.path.join(PROJECT_PATH, 'templates'),
+)
+
+LOCALE_PATHS = (
+    os.path.join(PROJECT_PATH, 'locale'),
 )
 
 INSTALLED_APPS = (
@@ -182,3 +190,4 @@ SECURE_PATHS = (
 LOGIN_REDIRECT_URL = '/fondo/main'
 LOGIN_URL = '/login'
 #LOGOUT_URL = '/logout'
+

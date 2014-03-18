@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load i18n %}
 {% block title %}Home{% endblock %}
 {% block meta %}
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,7 +18,7 @@
       <div class="panel panel-default">
 	<div class="panel-heading">
 	  <div class="panel-title">
-	    Log into your account
+	    {% trans "login_init_session" %}
 	  </div>
 	</div>
 	<div class="panel-body">
@@ -26,24 +27,24 @@
 	    {% if form.errors %}
 	    <div class="form-group">
 	      <p class="alert alert-danger">
-		Invalid username/password combination
+		{% trans "login_error" %}
 	      </p>
 	    </div>
 	    {% endif %}
 	    <div class="form-group">
-	      <label for="id_username">Username</label>
+	      <label for="id_username">{% trans "login_username" %}</label>
 	      <input type="text" class="form-control" id="id_username" name="username" autofocus />
 	    </div>
 	    <div class="form-group">
-	      <label for="id_password">Password</label>
+	      <label for="id_password">{% trans "login_password" %}</label>
 	      <input type="password" class="form-control" id="id_password" name="password" />
 	    </div>
 	    <div class="form-group">
 	      <input type="checkbox" id="id_rememberme" name="rememberme" />
-	      <label for="id_rememberme">Remember me</label>
+	      <label for="id_rememberme">{% trans "login_remember_me" %}</label>
 	    </div>
 	    <div class="text-center">
-	      <button class="btn btn-primary" type="submit">Login</button>
+	      <button class="btn btn-primary" type="submit">{% trans "login_submit" %}</button>
 	    </div>
 	    <input type="hidden" name="next" value="{{ next }}" />
 	    {% csrf_token %}
