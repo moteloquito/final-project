@@ -1,4 +1,4 @@
-from final.apps.fondo.models import Fondo, Ticket
+from final.apps.fondo.models import PettyCash, Ticket
 from rest_framework import serializers
 from django.core import serializers as sers
 from django.utils.encoding import smart_text
@@ -6,7 +6,7 @@ from django.utils.encoding import smart_text
 class FondoSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta():
-        model = Fondo
+        model = PettyCash
         fields = ('id', 'name', 'description')
 
 class TicketSerializer(serializers.HyperlinkedModelSerializer):

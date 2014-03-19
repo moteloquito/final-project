@@ -1,25 +1,33 @@
-from django.db.models import CharField, DateField, DecimalField, ForeignKey, Model
-from final.apps.fondo.models import Fondo
+from django.db import models
+from django.utils.translation import ugettext as _
+
+from .petty_cash import PettyCash
 
 TICKET_STATUS_CHOICES = (
-    ('OPEN', 'Open'),
-    ('SUBM', 'Submited'),
-    ('APRV', 'Aproved'),
-    ('REJE', 'Rejected'),
-    ('CLOS', 'Closed'),
+    ('OPEN', _('Open')),
+    ('SUBM', _('Submited')),
+    ('APRV', _('Aproved')),
+    ('REJE', _('Rejected')),
+    ('CLOS', _('Closed')),
 )
 
 
-class Ticket(Model):
-    value = DecimalField(max_digits=10, decimal_places=2)
-    description = CharField(max_length=64)
-    date = DateField()
-    fondo = ForeignKey(Fondo)
-    status = CharField(max_length=4, choices=TICKET_STATUS_CHOICES, default='OPEN')
+class Ticket(models.Model):
+
+    ammount = models.DecimalField(verbose_name=_('ammount'), max_digits=10,
+                                  decimal_places=2)
+    description = models.CharField(verbose_name=_('description'),
+                                   max_length=64)
+    date = models.DateField(verbose_name=_('fecha'))
+    petty_cash = models.ForeignKey(PettyCash)
+    status = models.CharField(verbose_name=_('status'), max_length=4,
+                              choices=TICKET_STATUS_CHOICES, default='OPEN')
 
     def __unicode__(self):
-        return "%s - %s: %0.2f" % (self.fondo.name, self.description, self.value)
+        return "%s - %s: %0.2f" % (self.petty_cash.name, self.description,
+                                   self.value)
 
     class Meta:
-        db_table = 'ticket'
         app_label = 'fondo'
+        verbose_name = _('ticket')
+        verbose_name_plural = _('tickets')

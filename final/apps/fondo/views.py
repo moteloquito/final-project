@@ -17,20 +17,21 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework import status
 from final.apps.fondo.domain.serializers import FondoSerializer, TicketSerializer, QuerySetSerializer
-from final.apps.fondo.models import Fondo, Ticket
+from final.apps.fondo.models import PettyCash, Ticket
 import logging
 
 _logger = logging.getLogger(__name__)
 
 def main(request):
     u = request.user
-    fondos = u.fondo_set.all()
+    fondos = []
+    # fondos = u.customuser.pettycash_set.all()
     return render_to_response('fondo/main.html', {'fondos': fondos})
 
 def get_fondo_status(request, fondo_id):
     """ Gets the current status.
     """
-    fondo = get_object_or_404(Fondo, pk=fondo_id)
+    fondo = get_object_or_404(PettyCash, pk=fondo_id)
     submited = fondo.ticket_set.filter(status='SUBM')
     aproved = fondo.ticket_set.filter(status='OPEN')
 
@@ -58,7 +59,7 @@ def get_ticket_for_fondo(request, fondo_id):
         size = request.POST['size']
         
     _logger.debug("Page: %s, size: %s" % (page, size))
-    fondo = get_object_or_404(Fondo, pk=fondo_id)
+    fondo = get_object_or_404(PettyCash, pk=fondo_id)
     tickets = fondo.ticket_set.all()
     p = Paginator(tickets, size)
     try:
@@ -91,13 +92,13 @@ def get_ticket_for_fondo(request, fondo_id):
 
 class FondoViewSet(viewsets.ModelViewSet):
 
-    queryset = Fondo.objects.all()
+    queryset = PettyCash.objects.all()
     serializer_class = FondoSerializer
 
     def list(self, request):
         
         if self.is_superuser(request):
-            q = Fondo.objects.all()
+            q = PettyCash.objects.all()
         else:
             q = request.user.fondo_set.all()
 
@@ -106,8 +107,8 @@ class FondoViewSet(viewsets.ModelViewSet):
     def retrieve(self, request, pk=None):
 
         try:
-            f = Fondo.objects.get(pk=pk)
-        except Fondo.DoesNotExist:
+            f = PettyCash.objects.get(pk=pk)
+        except PettyCash.DoesNotExist:
             return Response({'error': 'Not found'}, status=status.HTTP_404_NOT_FOUND)
         serializer = FondoSerializer(f)
         if self.is_superuser(request) or f.owner.id == request.user.id:
@@ -136,7 +137,7 @@ class TicketViewSet(viewsets.ModelViewSet):
         _logger.debug("Getting tickets for fondo %s and status %s" % (fondo_id, status))
         
         user = request.user
-        fondo = get_object_or_404(Fondo, pk=fondo_id)
+        fondo = get_object_or_404(PettyCash, pk=fondo_id)
 
         if status is not None:
             q = Ticket.objects.filter(fondo=fondo, status=status)
